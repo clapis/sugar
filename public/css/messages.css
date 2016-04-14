@@ -1,0 +1,90 @@
+﻿.messages-page {
+}
+
+.threads-section {
+    -webkit-box-shadow: 0 0 3px #ddd;
+    -ms-box-shadow: 0 0 3px #ddd;
+    box-shadow: 0 0 3px #ddd;
+    padding: 0;
+}
+
+.thread-list {
+    height: 600px;
+    overflow: auto;
+}
+    
+.thread {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+}
+
+.thread img {
+    height: 50px;
+    width: 50px;
+}
+
+.messages-section {
+    -webkit-box-shadow: 0 0 3px #ddd;
+    -ms-box-shadow: 0 0 3px #ddd;
+    box-shadow: 0 0 3px #ddd;
+    padding: 0;
+
+}
+
+.message-list {
+    height: 500px;
+    overflow: auto;
+    padding: 5px;
+}
+
+.message {
+    padding: 10px;
+    margin: 0;
+}
+
+.message img {
+    height: 32px;
+    width: 32px;
+}
+.message .message-sender {
+    color:#003bb3;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.message .time {
+    color: #bfbfbf;
+}
+
+.message .glyphicon-time {
+    margin-right: 5px;
+}
+
+.new-message-panel {
+    border-top: 1px solid #eee;
+    padding: 10px;
+    height: 100px;
+}
+
+    
+/* Let's get this party started */
+.messages-page ::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+.messages-page ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}
+
+/* Handle */
+.messages-page ::-webkit-scrollbar-thumb {
+    background:#ddd; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+.messages-page ::-webkit-scrollbar-thumb:window-inactive {
+    background: #ddd; 
+}

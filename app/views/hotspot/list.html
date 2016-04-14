@@ -1,0 +1,32 @@
+﻿<div id="list-page" class="container">
+    <div class="row">
+        <section class="col-md-12">
+            <br /><hr />
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Wifi</th>
+                        <th>Address</th>
+                        <th>Download</th>
+                        <th>Upload</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="hotspot in hotspots">
+                        <td><a href="hotspot/{{hotspot.id}}">{{ hotspot.name }}</a></td>
+                        <td>{{ hotspot.address }}</td>
+                        <td>{{ hotspot.download | number }} Mbps</td>
+                        <td>{{ hotspot.upload | number }} Mbps</td>
+                        <td>{{ hotspot.price | currency }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>   
+    <div class="row">
+        <section class="col-md-12 loading">
+            <p ng-show="loading">loading.. </p>
+        </section>
+    </div> 
+</div>

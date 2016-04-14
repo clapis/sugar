@@ -1,0 +1,63 @@
+﻿<div class="container">
+    
+    <h2>Settings</h2>
+
+    <div class="row">
+
+        <section class="col-md-6 change-password">
+
+            <h3>Change Password</h3>
+            <hr />
+
+            <form name="form" class="form-horizontal" novalidate ng-submit="changePassword()">
+
+                <div class="form-group">
+                    <label for="current" class="control-label col-md-4">Current password</label>
+                    <div class="col-md-8" ng-class="{ 'has-error': form.currentPassword.$touched && form.currentPassword.$invalid}">
+                        <input id="current" name="current" type="password" class="form-control"
+                               ng-model="password.current" required />
+                        <p class="help-block" ng-show="form.current.$touched && form.current.$error.required">Please enter your current password</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="newpass" class="control-label col-md-4">New password</label>
+                    <div class="col-md-8" ng-class="{ 'has-error': form.newpass.$touched && form.newpass.$invalid}">
+                        <input id="newpass" name="newpass" type="password" class="form-control"
+                               ng-model="password.newpass" required ng-minlength="6" />
+                        <p class="help-block" ng-show="form.newpass.$touched && form.newpass.$error.required">Please enter a new password</p>
+                        <p class="help-block" ng-show="form.newpass.$touched && form.newpass.$error.minlength">New password must be at least 6 characters long</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-4">Confirm new password</label>
+                    <div class="col-md-8" ng-class="{ 'has-error': form.confirm.$touched && form.confirm.$invalid}">
+                        <input id="confirm" name="confirm" type="password" class="form-control"
+                               ng-model="password.confirm" dx-equal="password.newpass" required />
+                        <p class="help-block" ng-show="form.confirm.$touched && form.confirm.$error.required">Please confirm the new password</p>
+                        <p class="help-block" ng-show="form.confirm.$touched && form.confirm.$error.equal">Passwords don't match</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="password.show" ng-change="togglePassword()"/> Show password
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Change password</button>
+                    </div>
+                </div>
+
+            </form>
+        </section>
+    </div>
+
+</div>

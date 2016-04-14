@@ -1,0 +1,16 @@
+﻿<div class="row">
+
+    <section class="col-md-4">
+        <div id="map-canvas" style="height: 300px"></div>
+    </section>
+
+    <section class="col-md-6">
+        <h2>{{ hotspot.name }}</h2>
+        <p>Download: {{ hotspot.download | number }} Mbps</p>
+        <p>Upload: {{ hotspot.upload | number }} Mbps</p>
+        <p>Price per month: {{ hotspot.price | currency }}</p>
+        <p>Address: {{ hotspot.address }}</p>
+        <p>Address shouldn't really matter and poses privacy threat to users</p>
+    </section>
+
+</div>

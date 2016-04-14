@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var express = require('express');
 var morgan = require('morgan');
 
-var controllers = require('./controllers')
+var config = require('./config');
+var controllers = require('./controllers');
 
 // web app
 var app = express();
@@ -23,4 +24,4 @@ app.get('/', function(request, response) {
 });
 
 // start server
-app.listen(process.env.PORT || 5000);
+app.listen(config.server.port);

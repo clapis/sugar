@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var phonetic = require('phonetic');
 
 var cities = require('./cities');
-var config = require('../config');
-var Hotspot = require('../model/hotspot');
+var config = require('../../config');
+var Hotspot = require('../../model/hotspot');
 
 function HotspotGenerator () {
 

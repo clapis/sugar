@@ -6,7 +6,7 @@
     var nodemon = require('gulp-nodemon');
 
     // load all tasks in task folder
-    requireDir('./.tasks/');
+    requireDir('./tasks/');
 
     // define tasks
     gulp.task('lint', ['lint-html']);

@@ -61,7 +61,7 @@
 
                 function load() {
 
-                    var level = map.getZoom() + 2;
+                    var level = 0; // map.getZoom() + 2;
 
                     mapProxy.clusters(level)
                         .then(function (result) {
@@ -83,8 +83,8 @@
                     var count = cluster.count;
                     var center = { lat: cluster.center.lat, lng: cluster.center.lng };
 
-                    var sw = { lat: cluster.bounds.bottom, lng: cluster.bounds.left };
-                    var ne = { lat: cluster.bounds.top, lng: cluster.bounds.right };
+                    var sw = { lat: cluster.bounds.south, lng: cluster.bounds.west };
+                    var ne = { lat: cluster.bounds.north, lng: cluster.bounds.east };
 
                     var bounds = new google.maps.LatLngBounds(sw, ne);
 

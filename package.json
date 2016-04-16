@@ -4,9 +4,11 @@
   "description": "",
   "main": "server.js",
   "engines": {
-    "node": "5.10.1"
+    "node": "5.10.1",
+    "npm": "3.8.3"
   },
   "scripts": {
+    "dev": "gulp dev",
     "build": "gulp build",
     "postinstall": "bower install && gulp build",
     "start": "node server.js",
@@ -28,6 +30,7 @@
     "mongodb": "^2.1.14",
     "mongoose": "^4.3.7",
     "morgan": "^1.6.1",
+    "phonetic": "^0.1.1",
     "require-dir": "^0.3.0"
   }
 }

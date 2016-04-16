@@ -1,20 +1,20 @@
 module.exports = Boundary;
 
-function Boundary(top, right, bottom, left) {
-  this.top = top;
-  this.bottom = bottom;
-  this.left = left;
-  this.right = right;
+function Boundary(north, east, south, west) {
+  this.north = north;
+  this.south = south;
+  this.west = west;
+  this.east = east;
 }
 
 Boundary.prototype.contains = function(point) {
-  return point.lat < this.top && point.lat > this.bottom
-    && point.lng < this.right && point.lng > this.left;
+  return point.lat < this.north && point.lat > this.south
+    && point.lng < this.east && point.lng > this.west;
 }
 
 Boundary.prototype.extend = function(point) {
-  this.left = Math.min(this.left, point.lng);
-  this.bottom = Math.min(this.bottom, point.lat);
-  this.right = Math.max(this.right, point.lng);
-  this.top = Math.max(this.top, point.lat);
+  this.west = Math.min(this.west, point.lng);
+  this.south = Math.min(this.south, point.lat);
+  this.east = Math.max(this.east, point.lng);
+  this.north = Math.max(this.north, point.lat);
 }

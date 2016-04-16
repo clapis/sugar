@@ -15,17 +15,19 @@ function ClusterService() {
     return client
       .connect(config.database)
       .then(function (db) {
-        var restos = db.collection('restaurants');
+        var restos = db.collection('hotspots');
         return restos.find({}).limit(1000).toArray();
         //db.close();
       })
-      .then(cluster);
+      .then(function(docs) {
+          return cluster(docs, level);
+      });
 
   }
 
-  function cluster(docs) {
+  function cluster(docs, level) {
 
-    var manager = new ClusterManager(2);
+    var manager = new ClusterManager(level);
 
     for (var i = 0; i < docs.length; i++) {
       manager.add(Point.FromGeoJSON(docs[i].location));

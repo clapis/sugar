@@ -23,7 +23,7 @@
 
     });
 
-    gulp.task('develop', ['build', 'watch'] ,function() {
+    gulp.task('dev', ['build', 'watch'] ,function() {
       nodemon({ script: 'server.js' });
     });
 

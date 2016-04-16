@@ -20,7 +20,7 @@ app.use('/app/views', express.static(__dirname + '/app/views'));
 
 // index.html
 app.get('*', function(request, response) {
-  response.sendFile('index.html', { root: __dirname + '/public'});
+  response.sendFile('index.html', { root: __dirname + '/app/views'});
 });
 
 // start server

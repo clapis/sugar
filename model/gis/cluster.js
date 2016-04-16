@@ -10,10 +10,8 @@ function Cluster (point) {
 }
 
 Cluster.prototype.add = function(point) {
-
   this.center.lat = ((this.center.lat * this.count) + point.lat) / (this.count + 1);
   this.center.lng = ((this.center.lng * this.count) + point.lng) / (this.count + 1);
   this.bounds.extend(point);
   this.count++;
-
 }

@@ -14,7 +14,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="hotspot in hotspots">
-                        <td><a href="hotspot/{{hotspot.id}}">{{ hotspot.name }}</a></td>
+                        <td><a ui-sref="hotspot/{{hotspot.id}}">{{ hotspot.name }}</a></td>
                         <td>{{ hotspot.address }}</td>
                         <td>{{ hotspot.download | number }} Mbps</td>
                         <td>{{ hotspot.upload | number }} Mbps</td>
@@ -23,10 +23,10 @@
                 </tbody>
             </table>
         </section>
-    </div>   
+    </div>
     <div class="row">
         <section class="col-md-12 loading">
             <p ng-show="loading">loading.. </p>
         </section>
-    </div> 
+    </div>
 </div>

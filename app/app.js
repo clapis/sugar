@@ -10,7 +10,7 @@
     var controllers = angular.module('app.controllers', []);
 
     var app = angular.module('app', [
-        'ngRoute',
+        'ui.router',
         'app.store',
         'app.common',
         'app.filters',
@@ -21,6 +21,3 @@
     ]);
 
 })(shawi, angular);
-
-
-

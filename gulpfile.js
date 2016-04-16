@@ -12,19 +12,12 @@
     gulp.task('lint', ['lint-html']);
     gulp.task('build', ['libs-js', 'app-js', 'libs-css', 'app-css', 'libs-fonts']);
 
-    // watch for file changes
-    gulp.task('watch', function () {
-
-        // app js files
-        gulp.watch('./app/**/*.js', ['app-js']);
-
-        // app css files
-        gulp.watch('./css/*.css', ['app-css'])
-
-    });
-
-    gulp.task('dev', ['build', 'watch'] ,function() {
-      nodemon({ script: 'server.js' });
+    gulp.task('dev',['build'], function() {
+      nodemon({
+          script: 'server.js',
+          tasks: ['build'],
+          ignore: ['public/dist']
+      });
     });
 
 

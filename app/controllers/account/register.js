@@ -7,7 +7,7 @@
         .controller('AccountRegisterController', ['$scope', '$location', 'AccountService', 'MessageBus',
             function ($scope, $location, accountService, messageBus) {
 
-                function register() {
+                $scope.register = function() {
 
                     $scope.errors = [];
 
@@ -26,9 +26,6 @@
                         });
                 };
 
-                angular.extend($scope, {
-                    register: register
-                });
             }
         ]);
 

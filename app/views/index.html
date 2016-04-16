@@ -19,23 +19,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">Wifi Sugar</a>
+                <a ui-sref="map" class="navbar-brand">Wifi Sugar</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="about">How it works</a></li>
-                    <li><a href="share">Share my Hotspot</a></li>
+                    <li><a ui-sref="about">How it works</a></li>
+                    <li><a ui-sref="share">Share my Hotspot</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a ng-hide="user.isAuthenticated()" href="login">Login</a></li>
+                    <li>
+                        <a ui-sref="login" ng-hide="user.isAuthenticated()">Login</a>
+                    </li>
                     <li ng-show="user.isAuthenticated()" class="dropdown" ng-cloak>
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ user.username }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="messages">My Messages</a></li>
-                            <li><a href="settings">Settings</a></li>
-                            <li><a href="" ng-click="logout()">Logout</a></li>
+                            <li><a ui-sref="messages">My Messages</a></li>
+                            <li><a ui-sref="settings">Settings</a></li>
+                            <li><a ng-click="logout()">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -45,7 +47,7 @@
 
     <div class="alert alert-warning" ng-show="notification" ng-cloak>{{ notification }}</div>
 
-    <div data-ng-view=""></div>
+    <div data-ui-view=""></div>
 
     <script src="/public/dist/js/libs.js"></script>
     <script src="/public/dist/js/app.js"></script>

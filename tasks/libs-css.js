@@ -5,7 +5,8 @@
     var concat = require('gulp-concat');
 
     var files = [
-        './bower_components/bootstrap/dist/css/bootstrap.min.css'
+        './bower_components/bootstrap/dist/css/bootstrap.min.css',
+        './bower_components/angular-toastr/dist/angular-toastr.min.css'
     ];
 
     gulp.task('libs-css', function () {

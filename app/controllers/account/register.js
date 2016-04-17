@@ -4,12 +4,10 @@
     var EVENT = shawi.model.EVENT;
 
     angular.module('app.controllers')
-        .controller('AccountRegisterController', ['$scope', '$location', 'AccountService', 'MessageBus',
-            function ($scope, $location, accountService, messageBus) {
+        .controller('AccountRegisterController', ['$scope', '$location', 'AccountService', 'MessageBus', 'Toaster',
+            function ($scope, $location, accountService, messageBus, toaster) {
 
                 $scope.register = function() {
-
-                    $scope.errors = [];
 
                     var details = {
                         username: $scope.username,
@@ -21,8 +19,9 @@
                             messageBus.publish(EVENT.Login);
                             $location.url('/');
                         })
-                        .catch(function () {
-                            $scope.errors.push('Oops, registration failed');
+                        .catch(function (error) {
+                            console.log(error);
+                            toaster.error('Oops.. something went wrong');
                         });
                 };
 

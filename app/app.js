@@ -10,6 +10,7 @@
     var controllers = angular.module('app.controllers', []);
 
     var app = angular.module('app', [
+        'toastr',
         'ui.router',
         'app.store',
         'app.common',

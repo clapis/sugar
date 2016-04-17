@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp build",
-    "postinstall": "bower cache clean && bower install && gulp build",
+    "postinstall": "bower install && gulp build",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

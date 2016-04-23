@@ -22,12 +22,16 @@
 
                     return accountProxy.login(credentials)
                         .then(function (response) {
+
+                            if (!response.data.success)
+                                return { success: false };
+
                             // create user from auth ticket
-                            var user = User.fromAuthTicket(response.data);
+                            var user = new User(username, response.data.token);
                             // persist user
                             userStore.setUserInfo(user, remember);
                             // return user
-                            return user;
+                            return { success: true, user: user };
                         });
                 };
 
@@ -41,7 +45,7 @@
                 service.register = function (details) {
 
                     return accountProxy.register(details)
-                        .then(function () {
+                        .then(function() {
                             // login user automatically
                             return service.login(details.username, details.password, false);
                         });

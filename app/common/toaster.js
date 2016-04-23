@@ -1,22 +1,22 @@
-(function() {
+(function(angular) {
     'use strict';
 
     angular
         .module('app.common')
-        .factory('Toaster', Toaster);
+        .service('Toaster', Toaster);
 
-    Toaster.$inject = ['toastr'];
+    Toaster.$inject = ['toastr', 'toastrConfig'];
 
-    function Toaster(toastr) {
+    function Toaster(toastr, toastrConfig) {
 
-        var toaster = {};
+        (function config () {
+            //toastrConfig.positionClass = 'toast-top-center';
+        })();
 
-        toaster.error = function(msg) {
+        this.error = function(msg) {
             toastr.error(msg);
         }
 
-        return toaster;
     }
 
-
-})();
+})(angular);

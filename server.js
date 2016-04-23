@@ -1,15 +1,21 @@
 var mongoose = require('mongoose');
 var express = require('express');
 var morgan = require('morgan');
+var bodyparser = require('body-parser')
 
 var config = require('./config');
 var controllers = require('./controllers');
+
+mongoose.connect(config.database);
 
 // web app
 var app = express();
 
 // logging
 app.use(morgan('dev'));
+
+// for parsing application/json
+app.use(bodyparser.json());
 
 // controllers
 app.use('/api', controllers);

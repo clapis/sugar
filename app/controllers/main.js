@@ -4,8 +4,8 @@
     var EVENT = shawi.model.EVENT;
 
     angular.module('app.controllers')
-        .controller('MainController', ['$scope', '$location', '$timeout', 'AccountService', 'MessageBus',
-            function ($scope, $location, $timeout, accountService, messageBus) {
+        .controller('MainController', ['$scope', '$state', '$timeout', 'AccountService', 'MessageBus',
+            function ($scope, $state, $timeout, accountService, messageBus) {
 
                 var notificationTimer;
 
@@ -17,7 +17,7 @@
                     accountService.logout()
                         .then(function() {
                             refreshUserInfo();
-                            $location.url('/login');
+                            $state.go('login');
                         });
                 }
 

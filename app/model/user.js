@@ -1,31 +1,16 @@
 ﻿(function (shawi) {
     'use strict';
 
-    shawi.model.User = function (username, accesToken) {
+    shawi.model.User = function (username, token) {
 
-        var self = this;
+        this.username = username;
+        this.token = token;
 
-        // constructor
-        (function () {
-            self.username = username || '';
-        }());
-
-        // priviledged methods
-        function isAuthenticated() {
-            return !!this.accessToken;
-        }
-
-        return {
-            username: username,
-            accessToken: accesToken,
-            isAuthenticated: isAuthenticated
-        };
     }
 
-    // static methods
-    shawi.model.User.fromAuthTicket = function (ticket) {
-        return new shawi.model.User(ticket.username, ticket.access_token);
+    shawi.model.User.prototype.isAuthenticated = function() {
+        return !!this.token;
     }
+
 
 }(shawi));
-

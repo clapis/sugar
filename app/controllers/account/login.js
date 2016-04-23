@@ -1,32 +1,36 @@
-﻿(function (shawi, angular) {
+(function (shawi, angular) {
     'use strict';
 
     var EVENT = shawi.model.EVENT;
 
-    angular.module('app.controllers')
-        .controller('AccountLoginController', ['$scope', '$location', 'AccountService', 'MessageBus',
-            function ($scope, $location, accountService, messageBus) {
+    angular
+        .module('app.controllers')
+        .controller('AccountLoginController', AccountLoginController);
 
-                $scope.remeber = true;
+    AccountLoginController.$inject = ['$scope', '$state', 'AccountService', 'MessageBus', 'Toaster'];
 
-                $scope.login = function() {
+    function AccountLoginController($scope, $state, accountService, bus, toaster) {
 
-                    $scope.errors = [];
+        $scope.remeber = true;
 
-                    accountService.login($scope.username, $scope.password, $scope.remember)
-                        .then(function (user) {
-                            messageBus.publish(EVENT.Login);
-                            $location.url('/');
-                        })
-                        .catch(function (result) {
-                            if (result.data && result.data.error === 'invalid_grant')
-                                $scope.errors.push(result.data.error_description);
-                            else
-                                $scope.errors.push('Humm.. login failed for some unknown reason');
-                        });
-                }
+        $scope.login = function() {
 
-            }
-        ]);
+            accountService.login($scope.username, $scope.password, $scope.remember)
+                .then(function (result) {
+
+                    if (!result.success)
+                        return toaster.error('Login failed');
+
+                    bus.publish(EVENT.Login);
+                    $state.go('map');
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    toaster.error('Oops.. something went wrong');
+                });
+        }
+
+    }
 
 }(shawi, angular));

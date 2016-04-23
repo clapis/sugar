@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app.proxies')
-        .factory('AccountProxy', ['$http', 
+        .factory('AccountProxy', ['$http',
             function ($http) {
 
                 var proxy = {};
@@ -10,19 +10,11 @@
                 proxy.login = function (credentials) {
 
                     var data = {
-                        grant_type: "password",
                         username: credentials.username,
                         password: credentials.password
                     };
 
-                    var request = {
-                        method: 'POST',
-                        url: '/auth/token',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        data: $.param(data)
-                    };
-
-                    return $http(request);
+                    return $http.post('/api/account/login', data);
                 };
 
                 proxy.register = function (details) {
@@ -32,7 +24,7 @@
                         password: details.password
                     };
 
-                    return $http.post('/api/Account/Register', data);
+                    return $http.post('/api/account/register', data);
                 };
 
                 proxy.registerExternal = function (details) {
@@ -41,7 +33,7 @@
                          email: details.email
                     };
 
-                    return $http.post('/api/Account/RegisterExternal', data);
+                    return $http.post('/api/account/register-external', data);
                 }
 
                 proxy.changePassword = function (details) {
@@ -51,7 +43,7 @@
                         newPassword: details.newpass
                     };
 
-                    return $http.post('/api/Account/ChangePassword', data);
+                    return $http.post('/api/account/change-password', data);
                 };
 
                 return proxy;

@@ -39,7 +39,7 @@
                         <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="register()">Register</button>
                     </div>
                 </div>
-                <p><a ui-sref="login">Log in</a> if you already have a local account.</p>
+                <p><a ui-sref="login({ next: next })">Log in</a> if you already have a local account.</p>
 
             </form>
         </section>

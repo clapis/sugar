@@ -7,9 +7,11 @@
         .module('app.controllers')
         .controller('AccountRegisterController', AccountRegisterController);
 
-    AccountRegisterController.$inject = ['$scope', '$state', 'AccountService', 'MessageBus', 'Toaster'];
+    AccountRegisterController.$inject = ['$scope', '$state', '$stateParams', 'AccountService', 'MessageBus', 'Toaster'];
 
-    function AccountRegisterController($scope, $state, accountService, bus, toaster) {
+    function AccountRegisterController($scope, $state, $stateParams, accountService, bus, toaster) {
+
+        $scope.next = $stateParams.next || 'map';
 
         $scope.register = function() {
 
@@ -25,7 +27,7 @@
                         return toaster.error('Registration failed');
 
                     bus.publish(EVENT.Login);
-                    $state.go('map');
+                    $state.go($scope.next);
                 })
                 .catch(function (error) {
                     console.log(error);

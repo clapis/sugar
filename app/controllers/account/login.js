@@ -7,11 +7,12 @@
         .module('app.controllers')
         .controller('AccountLoginController', AccountLoginController);
 
-    AccountLoginController.$inject = ['$scope', '$state', 'AccountService', 'MessageBus', 'Toaster'];
+    AccountLoginController.$inject = ['$scope', '$state', '$stateParams', 'AccountService', 'MessageBus', 'Toaster'];
 
-    function AccountLoginController($scope, $state, accountService, bus, toaster) {
+    function AccountLoginController($scope, $state, $stateParams, accountService, bus, toaster) {
 
         $scope.remeber = true;
+        $scope.next = $stateParams.next || 'map';
 
         $scope.login = function() {
 
@@ -22,7 +23,7 @@
                         return toaster.error('Login failed');
 
                     bus.publish(EVENT.Login);
-                    $state.go('map');
+                    $state.go($scope.next);
 
                 })
                 .catch(function (error) {

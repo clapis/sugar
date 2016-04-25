@@ -38,7 +38,7 @@
                         <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="login()">Log in</button>
                     </div>
                 </div>
-                <p><a ui-sref="register">Register</a> if you don't have a local account.</p>
+                <p><a ui-sref="register({ next: next })">Register</a> if you don't have a local account.</p>
 
             </form>
         </section>

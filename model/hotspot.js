@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+var db = require('../db');
 
-module.exports = mongoose.model('Hotspot', new mongoose.Schema({
+module.exports = db.model('Hotspot', {
   name: String,
   price: Number,
   upload: Number,
@@ -9,4 +9,4 @@ module.exports = mongoose.model('Hotspot', new mongoose.Schema({
       type: String,
       coordinates: [Number]
   }
-}, { typeKey: '$type' }));
+}, { typeKey: '$type' });

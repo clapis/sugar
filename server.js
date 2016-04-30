@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
 var express = require('express');
 var morgan = require('morgan');
-var bodyparser = require('body-parser')
+var bodyparser = require('body-parser');
 
+var db = require('./db');
 var config = require('./config');
 var controllers = require('./controllers');
-
-mongoose.connect(config.database);
 
 // web app
 var app = express();

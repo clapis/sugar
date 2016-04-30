@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+var db = require('../db');
 
-module.exports = mongoose.model('User', new mongoose.Schema({
+module.exports = db.model('User', {
   username: String,
   password: String
-}));
+});

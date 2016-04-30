@@ -66,7 +66,15 @@ db.once('open', function() {
                     .map(c => gen.generate(20, cities[c]))
                     .reduce((x,y) => x.concat(y), []);
 
-    console.log(hotspots);
+    Hotspot.insertMany(hotspots, function(err, docs) {
 
-    db.close();
+        if (err)
+            console.error('Error: ' + err);
+        else
+            console.info('%d hotspots were successfully stored.', docs.length);
+
+        db.close();
+
+    })
+
 })

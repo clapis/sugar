@@ -1,6 +1,8 @@
+var Schema = require('mongoose').Schema;
+
 var db = require('../db');
 
-module.exports = db.model('Hotspot', {
+module.exports = db.model('Hotspot', new Schema({
   name: String,
   price: Number,
   upload: Number,
@@ -9,4 +11,4 @@ module.exports = db.model('Hotspot', {
       type: String,
       coordinates: [Number]
   }
-}, { typeKey: '$type' });
+}, { typeKey: '$type' }));

@@ -1,8 +1,7 @@
-var mongoose = require('mongoose');
 var phonetic = require('phonetic');
 
+var db = require('../../db');
 var cities = require('./cities');
-var config = require('../../config');
 var Hotspot = require('../../model/hotspot');
 
 function HotspotGenerator () {
@@ -59,20 +58,15 @@ function HotspotGenerator () {
 }
 
 
-mongoose.connect(config.database);
-mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
 
-var generator = new HotspotGenerator();
+    var gen = new HotspotGenerator();
 
-for(var city in cities) {
+    var hotspots = Object.keys(cities)
+                    .map(c => gen.generate(20, cities[c]))
+                    .reduce((x,y) => x.concat(y), []);
 
-    var hotspots = generator.generate(20, cities[city]);
+    console.log(hotspots);
 
-    hotspots.forEach(hotspot => {
-        hotspot.save()
-            .catch(function(error) {
-                console.log(error);
-            });
-    });
-
-}
+    db.close();
+})

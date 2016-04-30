@@ -51,4 +51,4 @@ mongoose.set('debug', true);
 
 mongoose.connect(config.database);
 
-module.exports = mongoose;
+module.exports = connection;

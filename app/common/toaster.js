@@ -13,6 +13,10 @@
             //toastrConfig.positionClass = 'toast-top-center';
         })();
 
+        this.success = function(msg) {
+            toastr.success(msg);
+        };
+
         this.error = function(msg) {
             toastr.error(msg);
         }

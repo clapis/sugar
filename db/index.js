@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 var config = require('../config');
 
+// Use native promises
+mongoose.Promise = global.Promise;
+
+
 var connection = mongoose.connection;
 
 // When connecting
@@ -47,6 +51,8 @@ process.on('SIGINT', function() {
   });
 });
 
+
+// Enable logging of queries
 // mongoose.set('debug', true);
 
 mongoose.connect(config.database);

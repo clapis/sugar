@@ -27,9 +27,23 @@ router.post('/register', function(request, response) {
         .then(function() {
             response.json({ success: true });
         })
-        .catch(function(err) {
-            throw err;
+        .catch(function(error) {
+            throw error;
         });
+
+});
+
+router.post('/change-password', function(request, response) {
+
+    var service = new AccountService();
+
+    service.changePassword(request.body.username, request.body.oldpass, request.body.newpass)
+        .then(function(result) {
+            response.json(result);
+        })
+        .catch(function(error) {
+            throw error;
+        })
 
 });
 

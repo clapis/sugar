@@ -39,8 +39,8 @@
                 proxy.changePassword = function (details) {
 
                     var data = {
-                        currentPassword: details.current,
-                        newPassword: details.newpass
+                        oldpass: details.current,
+                        newpass: details.newpass
                     };
 
                     return $http.post('/api/account/change-password', data);

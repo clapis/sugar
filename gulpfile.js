@@ -2,13 +2,11 @@
     'use strict';
 
     var gulp = require('gulp');
-    var requireDir = require('require-dir');
     var nodemon = require('gulp-nodemon');
 
-    // load all tasks in task folder
-    requireDir('./tasks/');
+    var tasks = require('./tasks');
 
-    // define tasks
+    // define top-level tasks
     gulp.task('lint', ['lint-html']);
     gulp.task('build', ['libs-js', 'app-js', 'libs-css', 'app-css', 'libs-fonts']);
 

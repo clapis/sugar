@@ -1,7 +1,6 @@
 ﻿(function() {
     'use strict';
 
-    var fs = require('fs');
     var gulp = require('gulp');
     var concat = require('gulp-concat');
 
@@ -16,20 +15,6 @@
     ];
 
     gulp.task('libs-js', function () {
-
-        console.log('Bundling of 3r party libraries');
-
-        // check that all file references are correct
-        var missing = files.filter(function (f) { return !fs.existsSync(f); });
-
-        if (missing.length > 0) {
-            console.log('*********** ERROR ************');
-            console.log('Following files cannot be found:');
-            console.log(missing);
-            return false;
-        }
-
-        console.log(files);
 
         return gulp.src(files)
             .pipe(concat('libs.js'))

@@ -11,10 +11,8 @@
 
     gulp.task('libs-css', function () {
 
-        //TODO: check referenced files on disk. gulp-expect-file?
-
         return gulp.src(files)
-            .pipe(concat('libs.css'))
+            .pipe(concat('lib.css'))
             .pipe(gulp.dest('./public/dist/css/'));
     });
 

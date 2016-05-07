@@ -12,7 +12,6 @@
         return gulp.src(files)
             .pipe(gulp.dest('./public/dist/fonts/'));
 
-
     });
 
 })();

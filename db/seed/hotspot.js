@@ -1,10 +1,10 @@
 var phonetic = require('phonetic');
 
-var db = require('../../db');
-var cities = require('./cities');
 var Hotspot = require('../../model/hotspot');
 
-function HotspotGenerator () {
+module.exports = HotspotGenerator;
+
+function HotspotGenerator() {
 
   function location(boundary) {
     var lngDelta = boundary.east - boundary.west;
@@ -56,25 +56,3 @@ function HotspotGenerator () {
   };
 
 }
-
-
-db.once('open', function() {
-
-    var gen = new HotspotGenerator();
-
-    var hotspots = Object.keys(cities)
-                    .map(c => gen.generate(20, cities[c]))
-                    .reduce((x,y) => x.concat(y), []);
-
-    Hotspot.insertMany(hotspots, function(err, docs) {
-
-        if (err)
-            console.error('Error: ' + err);
-        else
-            console.info('%d hotspots were successfully stored.', docs.length);
-
-        db.close();
-
-    })
-
-})

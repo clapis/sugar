@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken');
 
-var config = require('../config')
+var config = require('../config');
 var User = require('../model/user');
 
 var LogService = require('./log-service');
@@ -27,7 +27,16 @@ function AccountService() {
 
                 var token = jwt.sign(user.id, config.secret, { expiresIn: 60 });
                 return { success: true, token: token };
+            });
 
+    }
+
+    function exists(username) {
+
+        return User.findOne({ username: username })
+            .exec()
+            .then(function(user) {
+                return !!user;
             });
 
     }
@@ -39,7 +48,11 @@ function AccountService() {
           password: password
         });
 
-        return user.save();
+        return user.save()
+            .then(function(user) {
+                log.info('registered user ' + user.username);
+                return { success: true };
+            });
 
     }
 
@@ -60,6 +73,7 @@ function AccountService() {
 
     return {
         login: login,
+        exists: exists,
         register: register,
         changePassword: changePassword
     }

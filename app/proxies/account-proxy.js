@@ -1,54 +1,60 @@
 ﻿(function (shawi, angular) {
     'use strict';
 
-    angular.module('app.proxies')
-        .factory('AccountProxy', ['$http',
-            function ($http) {
+    angular
+        .module('app.proxies')
+        .factory('AccountProxy', AccountProxy);
 
-                var proxy = {};
+    AccountProxy.$inject = ['$http'];
 
-                proxy.login = function (credentials) {
+    function AccountProxy($http) {
 
-                    var data = {
-                        username: credentials.username,
-                        password: credentials.password
-                    };
+        var proxy = {};
 
-                    return $http.post('/api/account/login', data);
-                };
+        proxy.login = function (credentials) {
 
-                proxy.register = function (details) {
+            var data = {
+                username: credentials.username,
+                password: credentials.password
+            };
 
-                    var data = {
-                        username: details.username,
-                        password: details.password
-                    };
+            return $http.post('/api/account/login', data);
+        };
 
-                    return $http.post('/api/account/register', data);
-                };
+        proxy.exists = function(username) {
+            return $http.get('/api/account/exists/' + username);
+        };
 
-                proxy.registerExternal = function (details) {
+        proxy.register = function (details) {
 
-                    var data = {
-                         email: details.email
-                    };
+            var data = {
+                username: details.username,
+                password: details.password
+            };
 
-                    return $http.post('/api/account/register-external', data);
-                }
+            return $http.post('/api/account/register', data);
+        };
 
-                proxy.changePassword = function (details) {
+        proxy.registerExternal = function (details) {
 
-                    var data = {
-                        oldpass: details.current,
-                        newpass: details.newpass
-                    };
+            var data = {
+                 email: details.email
+            };
 
-                    return $http.post('/api/account/change-password', data);
-                };
+            return $http.post('/api/account/register-external', data);
+        }
 
-                return proxy;
+        proxy.changePassword = function (details) {
 
-            }
-        ]);
+            var data = {
+                oldpass: details.current,
+                newpass: details.newpass
+            };
+
+            return $http.post('/api/account/change-password', data);
+        };
+
+        return proxy;
+    }
 
 }(shawi, angular));

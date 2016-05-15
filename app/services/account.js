@@ -3,69 +3,76 @@
 
     var User = shawi.model.User;
 
-    angular.module('app.services')
-        .service('AccountService', ['$q', 'AccountProxy', 'UserStore',
-            function ($q, accountProxy, userStore) {
+    angular
+        .module('app.services')
+        .service('AccountService', AccountService);
 
-                var service = {};
+    AccountService.$inject = ['$q', 'AccountProxy', 'UserStore'];
 
-                service.getUserInfo = function () {
-                    return userStore.getUserInfo();
-                };
+    function AccountService($q, accountProxy, userStore) {
 
-                service.login = function (username, password, remember) {
+        var service = {};
 
-                    var credentials = {
-                        username: username,
-                        password: password
-                    };
+        service.getUserInfo = function () {
+            return userStore.getUserInfo();
+        };
 
-                    return accountProxy.login(credentials)
-                        .then(function (response) {
+        service.login = function (username, password, remember) {
 
-                            if (!response.data.success)
-                                return { success: false };
+            var credentials = {
+                username: username,
+                password: password
+            };
 
-                            // create user from auth ticket
-                            var user = new User(username, response.data.token);
-                            // persist user
-                            userStore.setUserInfo(user, remember);
-                            // return user
-                            return { success: true, user: user };
-                        });
-                };
+            return accountProxy.login(credentials)
+                .then(function (response) {
 
+                    if (!response.data.success)
+                        return { success: false };
 
-                service.logout = function () {
+                    // create user from auth ticket
+                    var user = new User(username, response.data.token);
+                    // persist user
+                    userStore.setUserInfo(user, remember);
+                    // return user
+                    return { success: true, user: user };
+                });
+        };
 
-                    return $.when(userStore.clearUserInfo());
+        service.exists = function(username) {
 
-                };
+            return accountProxy.exists(username);
 
-                service.register = function (details) {
+        };
 
-                    return accountProxy.register(details)
-                        .then(function() {
-                            // login user automatically
-                            return service.login(details.username, details.password, false);
-                        });
-                };
+        service.logout = function () {
 
-                service.registerExternal = function (details) {
+            return $.when(userStore.clearUserInfo());
 
-                    return accountProxy.registerExternal(details);
+        };
 
-                };
+        service.register = function (details) {
 
-                service.changePassword = function (details) {
+            return accountProxy.register(details)
+                .then(function() {
+                    // login user automatically
+                    return service.login(details.username, details.password, false);
+                });
+        };
 
-                    return accountProxy.changePassword(details);
+        service.registerExternal = function (details) {
 
-                };
+            return accountProxy.registerExternal(details);
 
-                return service;
+        };
 
-            }
-        ]);
+        service.changePassword = function (details) {
+
+            return accountProxy.changePassword(details);
+
+        };
+
+        return service;
+    }
 
 }(shawi, angular));

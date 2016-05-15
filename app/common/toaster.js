@@ -17,6 +17,10 @@
             toastr.success(msg);
         };
 
+        this.info = function(msg) {
+            toastr.info(msg);
+        }
+
         this.error = function(msg) {
             toastr.error(msg);
         }

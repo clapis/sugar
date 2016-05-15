@@ -8,32 +8,35 @@ function AccountController() {
     var router = express.Router();
     var accountService = new AccountService();
 
-    router.post('/login', function(request, response) {
-
+    router.post('/login', function(request, response, next) {
 
         accountService.login(request.body.username, request.body.password)
             .then(function(result) {
                 response.json(result);
             })
-            .catch(function(error) {
-                throw error;
-            })
-
+            .catch(next);
     });
 
-    router.post('/register', function(request, response) {
+    router.get('/exists/:username', function(request, response, next) {
+
+        accountService.exists(request.params.username)
+            .then(function(result) {
+                response.json(result);
+            })
+            .catch(next);
+    });
+
+    router.post('/register', function(request, response, next) {
 
         accountService.register(request.body.username, request.body.password)
-            .then(function() {
-                response.json({ success: true });
+            .then(function(result) {
+                response.json(result);
             })
-            .catch(function(error) {
-                throw error;
-            });
+            .catch(next);
 
     });
 
-    router.post('/change-password', function(request, response) {
+    router.post('/change-password', function(request, response, next) {
 
         var model = request.body;
 
@@ -41,9 +44,7 @@ function AccountController() {
             .then(function(result) {
                 response.json(result);
             })
-            .catch(function(error) {
-                throw error;
-            })
+            .catch(next);
 
     });
 

@@ -7,7 +7,7 @@ function ClusterController() {
 
     var router = express.Router();
 
-    router.get('/level/:level', function(request, response) {
+    router.get('/level/:level', function(request, response, next) {
 
       var level = request.params.level;
 
@@ -17,10 +17,7 @@ function ClusterController() {
         .then(function(clusters) {
           response.send(clusters);
         })
-        .catch(function(error) {
-          console.log(error);
-          response.status(500).send('Oops.. something went wrong. Dont do that again.');
-        });
+        .catch(next);
 
     });
 

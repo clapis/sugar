@@ -1,23 +1,26 @@
 ﻿(function (shawi, angular) {
     'use strict';
 
-    angular.module('app.common')
-        .factory('MessageBus', ['$rootScope',
-            function ($rootScope) {
+    angular
+        .module('app.common')
+        .factory('MessageBus', MessageBus);
 
-                var bus = {};
+    MessageBus.$inject = ['$rootScope'];
 
-                bus.publish = function (event) {
-                    $rootScope.$emit(event);
-                };
+    function MessageBus($rootScope) {
 
-                bus.on = function (event, callback) {
-                    $rootScope.$on(event, callback);
-                };
+        var bus = {};
 
-                return bus;
+        bus.publish = function (event) {
+            $rootScope.$emit(event);
+        };
 
-            }
-        ]);
+        bus.on = function (event, callback) {
+            $rootScope.$on(event, callback);
+        };
+
+        return bus;
+
+    }
 
 }(shawi, angular));

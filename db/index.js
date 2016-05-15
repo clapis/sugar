@@ -53,7 +53,7 @@ process.on('SIGINT', function() {
 
 
 // Enable logging of queries
-// mongoose.set('debug', true);
+ mongoose.set('debug', true);
 
 mongoose.connect(config.database);
 

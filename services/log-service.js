@@ -1,9 +1,9 @@
 module.exports = LogService;
 
-function LogService() {
+function LogService(name) {
 
     function log(level, msg) {
-        console.log(`${level}: ${msg}`);
+        console.log(`[${level}] ${name}: ${msg}`);
     }
 
     return {

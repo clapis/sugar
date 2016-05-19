@@ -1,4 +1,4 @@
-﻿(function (shawi, angular) {
+﻿(function (angular) {
     'use strict';
 
     var store = angular.module('app.store', []);
@@ -21,4 +21,4 @@
         'app.controllers'
     ]);
 
-})(shawi, angular);
+})(angular);

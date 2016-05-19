@@ -4,7 +4,7 @@ module.exports = ErrorHandler;
 
 function ErrorHandler() {
 
-    var log = new LogService();
+    var log = new LogService('controllers.error-handler');
 
     function handler(err, req, res, next) {
 

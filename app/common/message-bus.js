@@ -1,4 +1,4 @@
-﻿(function (shawi, angular) {
+﻿(function (angular) {
     'use strict';
 
     angular
@@ -23,4 +23,4 @@
 
     }
 
-}(shawi, angular));
+}(angular));

@@ -1,6 +1,3 @@
-var jwt = require('jsonwebtoken');
-
-var config = require('../config');
 var User = require('../model/user');
 
 var LogService = require('./log-service');
@@ -10,8 +7,8 @@ module.exports = AccountService;
 
 function AccountService() {
 
-    var log = new LogService();
     var mail = new MailService();
+    var log = new LogService('services.account');
 
     function login(username, password) {
 
@@ -20,14 +17,7 @@ function AccountService() {
             password: password
         };
 
-        return User.findOne(query)
-            .exec()
-            .then(function(user) {
-                if (!user) return { success: false };
-
-                var token = jwt.sign(user.id, config.secret, { expiresIn: 60 });
-                return { success: true, token: token };
-            });
+        return User.findOne(query).exec();
 
     }
 
@@ -56,14 +46,9 @@ function AccountService() {
 
     }
 
-    function changePassword(username, password, newpass) {
+    function changePassword(userId, newpass) {
 
-        var query = {
-            username: username,
-            password: password
-        };
-
-        return User.findOneAndUpdate(query, { password: newpass })
+        return User.findByIdAndUpdate(userId, { password: newpass })
             .exec()
             .then(function(user) {
                 return { success: !!user };

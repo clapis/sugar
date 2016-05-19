@@ -1,4 +1,4 @@
-﻿(function (shawi, angular) {
+﻿(function (angular) {
     'use strict';
 
     angular.module('app.common')
@@ -54,4 +54,4 @@
             }]
         );
 
-}(shawi, angular));
+}(angular));

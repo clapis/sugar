@@ -10,21 +10,25 @@ function AccountController() {
 
     var router = express.Router();
 
+    var account = new AccountService();
     var log = new LogService('controllers.account');
-    var accountService = new AccountService();
 
     router.post('/login', function(request, response, next) {
 
-        accountService.login(request.body.username, request.body.password)
-            .then(function(result) {
-                response.json(result);
+        var model = request.body;
+
+        account.login(model.username, model.password)
+            .then(function(user) {
+                if (!user) throw new Error('Invalid username/password');
+                var token = auth.token(user);
+                response.json({ success: true, token: token });
             })
             .catch(next);
     });
 
     router.get('/exists/:username', function(request, response, next) {
 
-        accountService.exists(request.params.username)
+        account.exists(request.params.username)
             .then(function(result) {
                 response.json(result);
             })
@@ -33,7 +37,7 @@ function AccountController() {
 
     router.post('/register', function(request, response, next) {
 
-        accountService.register(request.body.username, request.body.password)
+        account.register(request.body.username, request.body.password)
             .then(function(result) {
                 response.json(result);
             })
@@ -43,13 +47,16 @@ function AccountController() {
 
     router.post('/change-password', auth.require(), function(request, response, next) {
 
+        var user = request.user;
         var model = request.body;
 
-        log.debug(request.user);
-
-        accountService.changePassword(model.username, model.oldpass, model.newpass)
+        account.login(user.username, model.oldpass)
+            .then(function(user) {
+                if (!user) throw new Error('Invalid username/password');
+                return account.changePassword(user.id, model.newpass);
+            })
             .then(function(result) {
-                response.json(result);
+                response.json({ success: result.success });
             })
             .catch(next);
 

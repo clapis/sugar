@@ -9,6 +9,7 @@
         './app/namespace.js',
         './app/app.js',
         './app/config.js',
+        './app/routes.js',
         './app/map/**/*.js',
         './app/common/**/*.js',
         './app/directives/**/*.js',

@@ -1,4 +1,4 @@
-﻿(function (shawi, angular) {
+﻿(function (angular) {
     'use strict';
 
     angular
@@ -14,7 +14,7 @@
                 var user = userStore.getUserInfo();
 
                 if (user.isAuthenticated()) {
-                    var auth = { "Authorization": "Bearer " + user.accessToken };
+                    var auth = { "Authorization": "Bearer " + user.token };
                     angular.extend(config.headers, auth);
                 }
 
@@ -23,4 +23,4 @@
         };
     }
 
-}(shawi, angular));
+}(angular));

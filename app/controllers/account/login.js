@@ -7,29 +7,21 @@
         .module('app.controllers')
         .controller('AccountLoginController', AccountLoginController);
 
-    AccountLoginController.$inject = ['$scope', '$state', '$stateParams', 'AccountService', 'MessageBus', 'Toaster'];
+    AccountLoginController.$inject = ['$scope', '$state', '$stateParams', 'AccountService', 'MessageBus'];
 
-    function AccountLoginController($scope, $state, $stateParams, accountService, bus, toaster) {
+    function AccountLoginController($scope, $state, $stateParams, account, bus) {
 
         $scope.remeber = true;
         $scope.next = $stateParams.next || 'map';
 
         $scope.login = function() {
 
-            accountService.login($scope.username, $scope.password, $scope.remember)
-                .then(function (result) {
-
-                    if (!result.success)
-                        return toaster.error('Login failed');
-
+            account.login($scope.username, $scope.password, $scope.remember)
+                .then(function (user) {
                     bus.publish(EVENT.Login);
                     $state.go($scope.next);
-
                 })
-                .catch(function (error) {
-                    console.log(error);
-                    toaster.error('Oops.. something went wrong');
-                });
+                .catch($scope.onError);
         }
 
     }

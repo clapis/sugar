@@ -1,4 +1,6 @@
+var ValidationError = require('../errors/validation-error');
 var LogService = require('../services/log-service');
+
 
 module.exports = ErrorHandler;
 
@@ -10,7 +12,12 @@ function ErrorHandler() {
 
         log.error(err);
 
-        res.status(500).send('Oops, something went wrong');
+        if (err instanceof ValidationError) {
+            res.status(400).send(err.message);
+
+        } else {
+            res.status(500).send('Oops, something went wrong');
+        }
 
     }
 

@@ -7,9 +7,9 @@
         .module('app.controllers')
         .controller('AccountRegisterController', AccountRegisterController);
 
-    AccountRegisterController.$inject = ['$scope', '$state', '$stateParams', 'AccountService', 'MessageBus', 'Toaster'];
+    AccountRegisterController.$inject = ['$scope', '$state', '$stateParams', 'AccountService', 'MessageBus'];
 
-    function AccountRegisterController($scope, $state, $stateParams, accountService, bus, toaster) {
+    function AccountRegisterController($scope, $state, $stateParams, accountService, bus) {
 
         $scope.next = $stateParams.next || 'map';
 
@@ -21,21 +21,13 @@
             };
 
             accountService.register(details)
-                .then(function (result) {
-
-                    if (!result.success)
-                        return toaster.error('Registration failed');
-
+                .then(function (user) {
                     bus.publish(EVENT.Login);
                     $state.go($scope.next);
                 })
-                .catch(function (error) {
-                    console.log(error);
-                    toaster.error('Oops.. something went wrong');
-                });
+                .catch($scope.onError);
         };
 
     }
-
 
 }(shawi, angular));

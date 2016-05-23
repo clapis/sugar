@@ -3,47 +3,41 @@
 
     var EVENT = shawi.model.EVENT;
 
-    angular.module('app.controllers')
-        .controller('MainController', ['$scope', '$state', '$timeout', 'AccountService', 'MessageBus',
-            function ($scope, $state, $timeout, accountService, messageBus) {
+    angular
+        .module('app.controllers')
+        .controller('MainController', MainController);
 
-                var notificationTimer;
+    MainController.$inject = ['$scope', '$state', 'AccountService', 'MessageBus', 'Toaster'];
 
-                function refreshUserInfo() {
-                    $scope.user = accountService.getUserInfo();
-                }
+    function MainController ($scope, $state, account, bus, toaster) {
 
-                function logout() {
-                    accountService.logout()
-                        .then(function() {
-                            refreshUserInfo();
-                            $state.go('login');
-                        });
-                }
+        (function () {
+            bus.on(EVENT.Login, refreshUserInfo);
+            refreshUserInfo();
+        }());
 
-                // TODO: should this go throught the message bus or it's own service. rename to alert?!
-                function notify(msg) {
-                    $timeout.cancel(notificationTimer);
+        function refreshUserInfo() {
+            $scope.user = account.getUserInfo();
+        }
 
-                    $scope.notification = msg;
-
-                    notificationTimer = $timeout(function () { $scope.notification = null }, 2000);
-                }
-
-                (function () {
-
-                    messageBus.on(EVENT.Login, refreshUserInfo);
-
+        function logout() {
+            account.logout()
+                .then(function() {
                     refreshUserInfo();
-
-                }());
-
-                angular.extend($scope, {
-                    notify: notify,
-                    logout: logout
+                    $state.go('login');
                 });
+        }
 
-            }
-        ]);
+        function handleError(error) {
+            console.log(error);
+            toaster.error('Oops.. something went wrong');
+        }
+
+        angular.extend($scope, {
+            logout: logout,
+            onError: handleError
+        });
+
+    }
 
 }(shawi, angular));

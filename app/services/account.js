@@ -26,16 +26,14 @@
 
             return accountProxy.login(credentials)
                 .then(function (response) {
-
-                    if (!response.data.success)
-                        return { success: false };
-
-                    // create user from auth ticket
-                    var user = new User(username, response.data.token);
+                    // get token
+                    var token = response.data.token;
+                    // create user from token
+                    var user = new User(username, token);
                     // persist user
                     userStore.setUserInfo(user, remember);
                     // return user
-                    return { success: true, user: user };
+                    return user;
                 });
         };
 

@@ -19,9 +19,8 @@ function AccountController() {
 
         account.login(model.username, model.password)
             .then(function(user) {
-                if (!user) throw new Error('Invalid username/password');
                 var token = auth.token(user);
-                response.json({ success: true, token: token });
+                response.json({ token: token });
             })
             .catch(next);
     });
@@ -38,8 +37,8 @@ function AccountController() {
     router.post('/register', function(request, response, next) {
 
         account.register(request.body.username, request.body.password)
-            .then(function(result) {
-                response.json(result);
+            .then(function() {
+                response.sendStatus(200);
             })
             .catch(next);
 
@@ -52,11 +51,10 @@ function AccountController() {
 
         account.login(user.username, model.oldpass)
             .then(function(user) {
-                if (!user) throw new Error('Invalid username/password');
                 return account.changePassword(user.id, model.newpass);
             })
-            .then(function(result) {
-                response.json({ success: result.success });
+            .then(function(user) {
+                response.json({ success: !!user });
             })
             .catch(next);
 

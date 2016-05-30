@@ -12,7 +12,7 @@
     gulp.task('libs-css', function () {
 
         return gulp.src(files, { cwd: './bower_components'})
-            .pipe(concat('lib.css'))
+            .pipe(concat('libs.css'))
             .pipe(gulp.dest('./public/dist/css/'));
     });
 

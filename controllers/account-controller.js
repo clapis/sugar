@@ -19,8 +19,10 @@ function AccountController() {
 
         account.login(model.username, model.password)
             .then(function(user) {
+                if (!user) return response.json({ success: false });
+
                 var token = auth.token(user);
-                response.json({ token: token });
+                response.json({ success: true, token: token });
             })
             .catch(next);
     });
@@ -51,6 +53,7 @@ function AccountController() {
 
         account.login(user.username, model.oldpass)
             .then(function(user) {
+                if (!user) return;
                 return account.changePassword(user.id, model.newpass);
             })
             .then(function(user) {

@@ -23,12 +23,7 @@ function AccountService() {
             password: password
         };
 
-        return User.findOne(query).exec()
-            .then(function(user) {
-                if (!user) throw new ValidationError('Invalid username/password');
-                return user;
-            });
-
+        return User.findOne(query).exec();
     }
 
     function exists(username) {
@@ -44,7 +39,6 @@ function AccountService() {
     function register(username, password) {
 
         validateUsername(username);
-
         validatePassword(password);
 
         var user = new User({
@@ -66,7 +60,7 @@ function AccountService() {
         return User.findByIdAndUpdate(userId, { password: newpass })
             .exec()
             .then(function(user) {
-                if (!user) throw new ValidationError(`UserId ${userId} not found`);
+                if (!user) throw new Error(`UserId ${userId} not found`);
                 return user;
             });
 
@@ -81,7 +75,6 @@ function AccountService() {
     }
 
     function validatePassword(password) {
-        console.log('validating password: ' + password.length);
         if (!password)
             throw new ValidationError('password is required');
 

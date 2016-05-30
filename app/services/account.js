@@ -26,6 +26,8 @@
 
             return accountProxy.login(credentials)
                 .then(function (response) {
+                    // check for success
+                    if (!response.data.success) return;
                     // get token
                     var token = response.data.token;
                     // create user from token
@@ -55,6 +57,9 @@
                 .then(function() {
                     // login user automatically
                     return service.login(details.username, details.password, false);
+                })
+                .then(function(user) {
+                    return user;
                 });
         };
 

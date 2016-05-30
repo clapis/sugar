@@ -18,7 +18,11 @@
             };
 
             accountService.changePassword(details)
-                .then(function (result) {
+                .then(function (response) {
+
+                    if (!response.data.success)
+                        return toaster.error('Password change failed');
+
                     // reset form
                     $scope.password = {};
                     $scope.form.$setUntouched();

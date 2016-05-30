@@ -7,9 +7,9 @@
         .module('app.controllers')
         .controller('AccountLoginController', AccountLoginController);
 
-    AccountLoginController.$inject = ['$scope', '$state', '$stateParams', 'AccountService', 'MessageBus'];
+    AccountLoginController.$inject = ['$scope', '$state', '$stateParams', 'AccountService', 'MessageBus', 'Toaster'];
 
-    function AccountLoginController($scope, $state, $stateParams, account, bus) {
+    function AccountLoginController($scope, $state, $stateParams, account, bus, toaster) {
 
         $scope.remeber = true;
         $scope.next = $stateParams.next || 'map';
@@ -18,6 +18,10 @@
 
             account.login($scope.username, $scope.password, $scope.remember)
                 .then(function (user) {
+
+                    if (!user)
+                        return toaster.error('Invalid username/password');
+
                     bus.publish(EVENT.Login);
                     $state.go($scope.next);
                 })

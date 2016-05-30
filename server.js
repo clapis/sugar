@@ -21,11 +21,10 @@ app.use('/api', controllers);
 
 // static files
 app.use('/public', express.static(__dirname + '/public'));
-app.use('/app/views', express.static(__dirname + '/app/views'));
 
 // index.html
 app.get('*', function(request, response) {
-  response.sendFile('index.html', { root: __dirname + '/app/views'});
+  response.sendFile('index.html', { root: __dirname + '/public'});
 });
 
 // start server

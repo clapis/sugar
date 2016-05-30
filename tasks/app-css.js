@@ -6,13 +6,13 @@
     var minify = require('gulp-minify-css');
 
     var files = [
-        './public/css/site.css',
-        './public/css/messages.css'
+        'site.css',
+        'messages.css'
     ];
 
     gulp.task('app-css', function () {
 
-        return gulp.src(files)
+        return gulp.src(files, { cwd: './public/css'})
             .pipe(concat('app.css'))
             .pipe(minify())
             .pipe(gulp.dest('./public/dist/css/'));

@@ -11,58 +11,58 @@
                 .state('map', {
                     url: '/',
                     controller: 'MapController',
-                    templateUrl: '/app/views/map.html'
+                    templateUrl: '/public/views/map.html'
                 })
                 .state('share', {
                     url: '/share',
                     controller: 'HotspotCreateController',
-                    templateUrl: '/app/views/hotspot/create.html',
+                    templateUrl: '/public/views/hotspot/create.html',
                     login: true
                 })
                 .state('hotspot', {
                     url: '/hotspot/:id',
                     controller: 'HotspotDetailsController',
-                    templateUrl: '/app/views/hotspot/details.html'
+                    templateUrl: '/public/views/hotspot/details.html'
                 })
                 .state('hotspots', {
                     url: '/hotspots',
                     controller: 'HotspotListController',
-                    templateUrl: '/app/views/hotspot/list.html'
+                    templateUrl: '/public/views/hotspot/list.html'
                 })
                 .state('login', {
                     url: '/account/login?next',
                     controller: 'AccountLoginController',
-                    templateUrl: '/app/views/account/login.html'
+                    templateUrl: '/public/views/account/login.html'
                 })
                 .state('register', {
                     url: '/account/register?next',
                     controller: 'AccountRegisterController',
-                    templateUrl: '/app/views/account/register.html'
+                    templateUrl: '/public/views/account/register.html'
                 })
                 .state('register-external', {
                     url: '/account/register-external',
                     controller: 'AccountRegisterExternalController',
-                    templateUrl: '/app/views/account/register-external.html'
+                    templateUrl: '/public/views/account/register-external.html'
                 })
                 .state('settings', {
                     url: '/account/settings',
                     controller: 'AccountSettingsController',
-                    templateUrl: '/app/views/account/settings.html',
+                    templateUrl: '/public/views/account/settings.html',
                     login: true
                 })
                 .state('messages', {
                     url: '/messages',
                     controller: 'MessagesController',
-                    templateUrl: '/app/views/messages.html',
+                    templateUrl: '/public/views/messages.html',
                     login: true
                 })
                 .state('about', {
                     url: '/about',
-                    templateUrl: '/app/views/about.html'
+                    templateUrl: '/public/views/about.html'
                 })
                 .state('not-found', {
                     url: '/not-found',
-                    templateUrl: '/app/views/not-found.html'
+                    templateUrl: '/public/views/not-found.html'
                 })
                 .state('access-token', {
                     url: '/access-token',

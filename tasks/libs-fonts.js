@@ -4,12 +4,12 @@
     var gulp = require('gulp');
 
     var files = [
-        './bower_components/bootstrap/dist/fonts/*.*'
+        'bootstrap/dist/fonts/*.*'
     ];
 
     gulp.task('libs-fonts', function() {
 
-        return gulp.src(files)
+        return gulp.src(files, { cwd: './bower_components' })
             .pipe(gulp.dest('./public/dist/fonts/'));
 
     });

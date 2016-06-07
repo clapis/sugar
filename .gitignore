@@ -1,3 +1,6 @@
+# FS
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -38,5 +41,5 @@ db/data
 # Bower
 bower_components
 
+# Site distribution
 dist
-.DS_Store

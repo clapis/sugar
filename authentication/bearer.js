@@ -7,59 +7,58 @@ var User = require('../model/user');
 
 var LogService = require('../services/log-service');
 
-module.exports = new Authentication();
 
-function Authentication() {
+module.exports = BearerAuthentication;
+    
 
-    var log = new LogService('controllers.authentication');
+function BearerAuthentication() {
+    
+    var log = new LogService('authentication.bearer');
 
-    (function configure() {
-        log.debug('configure');
+    
+    function configure() {
+        log.debug(`configure`);
         passport.use(new BearerStrategy(authenticate));
-    })();
-
+    }
+    
     function authenticate(token, cb) {
 
-        log.debug(`authenticate token ${token}`);
+        log.debug(`authenticate bearer token ${token}`);
 
         jwt.verify(token, config.secret, function(error, userId) {
             if (error) {
-                log.info(`verify token ${token} failed.`, error);
+                log.info(`verify bearer token ${token} failed.`, error);
                 return cb(error);
             }
 
-            log.debug(`verify token ${token} succeeded. user id: ${userId}`);
+            log.debug(`verify bearer token ${token} succeeded. user id: ${userId}`);
 
             User.findById(userId).exec()
                 .then(function(user) {
                     if (!user) {
-                        log.error(`authenticate token ${token} failed. no user with id: ${userId}`);
+                        log.error(`authenticate bearer token ${token} failed. no user with id: ${userId}`);
                         return cb(null, false);
                     }
 
-                    log.debug(`authenticate token ${token} succeeded`);
+                    log.debug(`authenticate bearer token ${token} succeeded`);
                     return cb(null, user, { scope: 'all' });
                 })
                 .catch(function(error) {
-                    log.error(`authenticate token ${token} failed. ${error}`);
+                    log.error(`authenticate bearer token ${token} failed. ${error}`);
                     return cb(error);
                 });
 
         });
-
+        
     }
-
-    function token(user) {
-        return jwt.sign(user.id, config.secret, { expiresIn: 60 });
-    }
-
+    
     function require() {
         return passport.authenticate('bearer', { session: false });
     }
 
-    return {
-        token: token,
-        require: require,
-    }
-
+    return { 
+        configure: configure,
+        require: require
+    };
+    
 }

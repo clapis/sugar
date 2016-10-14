@@ -1,5 +1,6 @@
-var ValidationError = require('../errors/validation-error');
 var LogService = require('../services/log-service');
+
+var ValidationError = require('./validation-error');
 
 
 module.exports = ErrorHandler;

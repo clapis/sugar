@@ -1,5 +1,5 @@
 var express = require('express');
-var auth = require('./authentication');
+var auth = require('../authentication');
 
 var LogService = require('../services/log-service');
 var AccountService = require('../services/account-service');

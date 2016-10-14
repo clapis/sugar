@@ -6,6 +6,7 @@ var bodyparser = require('body-parser');
 var db = require('./db');
 var config = require('./config');
 var controllers = require('./controllers');
+var authentication = require('./authentication');
 
 // web app
 var app = express();
@@ -16,8 +17,11 @@ app.use(morgan('dev'));
 // for parsing application/json
 app.use(bodyparser.json());
 
+// authentication
+app.use('/auth', authentication.router);
+
 // controllers
-app.use('/api', controllers);
+app.use('/api', controllers.router);
 
 // static files
 app.use('/public', express.static(__dirname + '/public'));

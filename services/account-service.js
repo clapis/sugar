@@ -1,7 +1,7 @@
 var validator = require('validator');
 
 var User = require('../model/user');
-var ValidationError = require('../errors/validation-error');
+var ValidationError = require('../error/validation-error');
 
 var LogService = require('./log-service');
 var MailService = require('./mail-service');

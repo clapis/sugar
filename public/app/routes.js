@@ -70,7 +70,7 @@
                     template: ''
                 });
 
-            $urlRouterProvider.otherwise('/not-found');
+            // $urlRouterProvider.otherwise('/not-found');
 
             $locationProvider.html5Mode({ enabled: true, requireBase: false });
         }

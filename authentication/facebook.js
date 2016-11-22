@@ -9,34 +9,27 @@ var LogService = require('../services/log-service');
 
 
 module.exports = FacebookAuthentication;
-    
-function FacebookAuthentication() {
-    
-    var log = new LogService('authentication.facebook');
 
+function FacebookAuthentication() {
+
+    var log = new LogService('authentication.facebook');
 
     function configure(router) {
         log.debug(`configuring facebook authentication`);
-        passport.user(new FacebookStrategy(config.auth.facebook, authenticate));
-        
-        router.get('/facebook', authenticate);
-        router.get('/facebook/callback', callback);
-    }
-    
-    function require() {
-        passport.authenticate('facebook');
+        passport.use(new FacebookStrategy(config.auth.facebook, authenticate));
+
+        router.get('/facebook', passport.authenticate('facebook'));
+        router.get('/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
     }
 
-    function callback() {
-        passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' });
-    }
-    
     function authenticate(accessToken, refreshToken, profile, done) {
+        log.debug(`authenticate`);
+        log.info(accessToken);
+        log.info(profile);
         //if (error) return done(error);
-        log.debug(`authenticate`)
-        //done(null, user);
+        // done(null, user);
     }
-    
+
     return { configure: configure };
 
 }

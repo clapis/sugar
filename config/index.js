@@ -7,8 +7,9 @@ module.exports = {
             secret: process.env.SECRET || 'secret'
         },
         facebook: {
-            clientID: '',
-            clientSecret: ''
+            clientID: '221992414888218',
+            clientSecret: 'e8d76f46d8e420923fe2263056ae5ec7',
+            callbackURL: 'http://localhost:5000/auth/facebook/callback'
         }
     },
     database:  process.env.MONGODB_URI || 'mongodb://localhost:27017/sugar',
